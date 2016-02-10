@@ -27,8 +27,8 @@
 			<div id="button">Refresh GPS: <div id="timer"></div></div>
 
 			<div class="area">
-				<div class="box box1"><div id="latitude">11.01</div></div>
-				<div class="box box2"><div id="longitude">12.01</div></div>
+				<div class="box box1"><div id="longitude"></div></div>
+				<div class="box box2"><div id="latitude"></div></div>
 				<button onclick="getLocation()">Get coordinates</button>
 			</div>
 
@@ -46,7 +46,10 @@
 			}
 
 			function showPosition(position) {
-			    x.innerHTML = "Latitude: " + position.coords.latitude;
+
+				//parse with toFixed(5)
+
+			    x.innerHTML = position.coords.latitude;
 			    y.innerHTML = position.coords.longitude;
 			}
 			</script>
