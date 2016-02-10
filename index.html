@@ -48,9 +48,11 @@
 			function showPosition(position) {
 
 				//parse with toFixed(5)
+				var lat = (position.coords.latitude).toFixed(5);
+				var long = (position.coords.longitude).toFixed(5);
 
-			    x.innerHTML = position.coords.latitude;
-			    y.innerHTML = position.coords.longitude;
+			    x.innerHTML = lat;
+			    y.innerHTML = long;
 			}
 			</script>
 
