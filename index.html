@@ -7,15 +7,17 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="viewport" content="width=device-width, user-scalable=no">
-		
+
 		<link href="style.css" rel="stylesheet" type="text/css">
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js">
+
+		</script>
 	</head>
 
 	<body>
 	<style>
-	
-	</style>		<!-- This is the top bit with the image. 
+
+	</style>		<!-- This is the top bit with the image.
 		I wonder why there's no image tag here? -->
 		<div class="whitebit"></div>
 
@@ -25,9 +27,29 @@
 			<div id="button">Refresh GPS: <div id="timer"></div></div>
 
 			<div class="area">
-				<div class="box box1"><div id="latitude">Blah</div></div>
-				<div class="box box2"><div id="longitude">Blah</div></div>
+				<div class="box box1"><div id="latitude">11.01</div></div>
+				<div class="box box2"><div id="longitude">12.01</div></div>
+				<button onclick="getLocation()">Get coordinates</button>
 			</div>
+
+
+			<script>
+			var x = document.getElementById("latitude");
+			var y = document.getElementById("longitude");
+
+			function getLocation() {
+			    if (navigator.geolocation) {
+			        navigator.geolocation.getCurrentPosition(showPosition);
+			    } else {
+			        x.innerHTML = "Geolocation is not supported by this browser.";
+			    }
+			}
+
+			function showPosition(position) {
+			    x.innerHTML = "Latitude: " + position.coords.latitude;
+			    y.innerHTML = position.coords.longitude;
+			}
+			</script>
 
 
 
