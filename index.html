@@ -32,34 +32,60 @@
 				<button onclick="getLocation()">Get coordinates</button>
 			</div>
 
+			<div id = "e"></div>
+			<div id = "mapholder"></div>
 
 			<script>
-			var x = document.getElementById("latitude");
-			var y = document.getElementById("longitude");
+				var x = document.getElementById("latitude");
+				var y = document.getElementById("longitude");
 
-			function getLocation() {
-			    if (navigator.geolocation) {
-			        navigator.geolocation.getCurrentPosition(showPosition);
-			    } else {
-			        x.innerHTML = "Geolocation is not supported by this browser.";
-			    }
-			}
+				//To display any errors
+				var z = document.getElementById("e");
 
-			function showPosition(position) {
+				function getLocation() {
+				    if (navigator.geolocation) {
+				        navigator.geolocation.getCurrentPosition(showPosition, showError);
+				    } else {
+				        z.innerHTML = "Geolocation is not supported by this browser.";
+				    }
+				}
 
-				//parse with toFixed(5)
-				var lat = (position.coords.latitude).toFixed(5);
-				var long = (position.coords.longitude).toFixed(5);
+				function showPosition(position) {
 
-			    x.innerHTML = lat;
-			    y.innerHTML = long;
-			}
+					//limits coordinates to 5 decimal places
+					var lat = (position.coords.latitude).toFixed(5);
+					var long = (position.coords.longitude).toFixed(5);
+
+					//Sets longitude and latitude on page
+					x.innerHTML = lat;
+				  y.innerHTML = long;
+
+					var latlon = lat + "," + long;
+					var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
+    +latlon+"&zoom=14&size=400x300&sensor=false";
+    document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
+    }
+
+		function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            z.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            z.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            z.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            z.innerHTML = "An unknown error occurred."
+            break;
+    	}
+		}
+
 			</script>
 
 
 
-		<script>
-
-</script>
 	</body>
 </html>
